@@ -39,14 +39,14 @@ else{
 <main class="orderContainer">
     <?php
     $sqlQuery = "SELECT * FROM `orders`";
-    $sqlResult = $db->query($sqlQuery); // execute the query
-    if ($sqlResult->num_rows > 0) // if data is returned from DB
+    $sqlResult = $db->query($sqlQuery); 
+    if ($sqlResult->num_rows > 0)
     {
         // iterate through the rows
         while ($row = $sqlResult->fetch_assoc()) {
     ?>
             <div class="orderCard">
-                <p><strong>Order Number:</strong> <?php echo htmlspecialchars($row['orderID']); ?></p>
+                <p><strong>Order Number:</strong> <?php echo htmlspecialchars($row['order_id']); ?></p>
                 <p><strong>Email:</strong> <?php echo $row['email']; ?></p>
                 <p><strong>Phone:</strong> <?php echo $row['phone']; ?></p>
                 <p><strong>Name:</strong> <?php echo htmlspecialchars($row['name']); ?></p>
@@ -54,31 +54,36 @@ else{
                 <p><strong>City:</strong> <?php echo htmlspecialchars($row['city']); ?></p>
                 <p><strong>Postcode:</strong> <?php echo htmlspecialchars($row['postcode']); ?></p>
                 <p><strong>Province:</strong> <?php echo htmlspecialchars($row['province']); ?></p>
-                <p><strong>Card Number:</strong> <?php echo htmlspecialchars($row['cardNumber']); ?></p>
-                <p><strong>Card Expiry Month:</strong> <?php echo htmlspecialchars($row['cardExpiryMonth']); ?></p>
-                <p><strong>Card Expiry Year:</strong> <?php echo htmlspecialchars($row['cardExpiryYear']); ?></p>
-
+                <p><strong>Card Number:</strong> <?php echo htmlspecialchars($row['card_number']); ?></p>
+                <p><strong>Card Expiry Month:</strong> <?php echo htmlspecialchars($row['card_expiry_month']); ?></p>
+                <p><strong>Card Expiry Year:</strong> <?php echo htmlspecialchars($row['card_expiry_year']); ?></p>
+                <br>
                 <!-- Retrieve and display product details -->
                 <?php
-                $orderID = $row['orderID'];
-                $productQuery = "SELECT * FROM order_products WHERE orderID = $orderID";
+                $orderID = $row['order_id'];
+                $productQuery = "SELECT * FROM order_products WHERE order_id = $orderID";
                 $productResult = $db->query($productQuery);
 
                 if ($productResult->num_rows > 0) {
-                    echo "<p><strong>Products:</strong></p>";
-                    echo "<ul>";
+                    echo "<p><strong>Products List:</strong></p>";
+                    echo "</ul>";
                     while ($productRow = $productResult->fetch_assoc()) {
-                      echo "<p><strong>Product Name:</strong> {$productRow['productName']}</p>";
-                      echo "<p><strong>Price:</strong> {$productRow['price']}</p>";
+                      echo "<p><strong>Product Name:</strong> {$productRow['product_name']}</p>";
+                      echo "<p><strong>Price :</strong> $ " . $productRow['price'] . "</p>";
                       echo "<p><strong>Quantity:</strong> {$productRow['quantity']}</p>";
-                      echo "<p><strong>Total:</strong> {$productRow['total']}</p>";
+                      echo "<p><strong>Total:</strong> $ " . $productRow['total'] . "</p>";
                       echo "<hr>"; 
                   }
                     echo "</ul>";
+                    echo "<br>";
                 } else {
                     echo "<p>No products found for this order.</p>";
                 }
+
+                
                 ?>
+                <p><strong>Tax : </strong> <?php echo htmlspecialchars($row['tax_amount']); ?></p>
+                <p><strong>Total Amount : $ </strong> <?php echo htmlspecialchars($row['total_amount']); ?></p>
             </div>
     <?php
         }
@@ -87,7 +92,7 @@ else{
 </main>
 
 
-  <footer>
+<footer>
         <p>&copy; 2024 QUANTUMBYTE SOLUTIONS PVT LTD. All rights reserved.</p>
     </footer>
 </body>

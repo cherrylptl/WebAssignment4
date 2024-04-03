@@ -51,8 +51,12 @@
             echo "Welcome ". $_SESSION['username'];
             }
         ?>
+        <div class="form-page">
+            <form name="myform" id="myform" method="Post" action="">
         <div class="main-container">
+            
             <div class="product-page">
+                
                 <div class="slider">
                     <h1>Select Products</h1>
                     <br>
@@ -114,14 +118,14 @@
                     </div>
 
             </div>
+
             <div class="slider">
                     <h1>Receipt Details</h1>
                     <p id="formResult">The receipt will show .</p>
             </div>
         </div>
-            <div class="form-page">
-            <form name="myform" id="myform" method="Post" action="">
-                    <div class="slider">
+            
+        <div class="slider">
 
                         <h1>Customer Details</h1>
                         <br>
