@@ -65,8 +65,8 @@ else{
                 $productResult = $db->query($productQuery);
 
                 if ($productResult->num_rows > 0) {
-                    echo "<p><strong>Products List:</strong></p>";
-                    echo "</ul>";
+                    echo "<p><strong>Products List :</strong></p>";
+                    echo "<hr>"; 
                     while ($productRow = $productResult->fetch_assoc()) {
                       echo "<p><strong>Product Name:</strong> {$productRow['product_name']}</p>";
                       echo "<p><strong>Price :</strong> $ " . $productRow['price'] . "</p>";
