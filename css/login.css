@@ -3,3 +3,9 @@
     margin-left: 35%;
     margin-right: 35%;
 }
+
+.message {
+    color: white;
+    padding: 20px;
+    margin-left: 20px;
+}

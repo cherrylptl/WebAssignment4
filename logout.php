@@ -1,6 +1,6 @@
 <?php 
   session_start();
-  session_destroy(); // deletes the session
+  session_destroy();
 ?><!DOCTYPE html>
 <html>
 <head>
@@ -16,12 +16,12 @@
 <header class="header">
             <h1 class="green-text">QUANTUMBYTE SOLUTIONS</h1>
 </header>
+
 <div class="nav">
 <?php include('includes/nav.php'); ?>
 </div>
-  <main>
-  
 
+  <main>
     <div class="logout slider">
         <?php 
             echo 'Successfully logged out!';

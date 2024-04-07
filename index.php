@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="css/styles.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
+
     $(document).ready(function(){
         $('#myform').on('submit', function(e){
             e.preventDefault(); // Prevent default form submission
@@ -45,12 +46,7 @@
         <div class="nav">
             <?php include('includes/nav.php'); ?>
         </div>
-       
-        <?php
-            if(isset($_SESSION['username'])){
-            echo "Welcome ". $_SESSION['username'];
-            }
-        ?>
+
         <div class="form-page">
             <form name="myform" id="myform" method="Post" action="">
         <div class="main-container">
@@ -177,16 +173,6 @@
                             <input id="expirydate" placeholder="MMM" type="text" name="expirydate">
                             <input id="year" placeholder="YYYY" type="text" name="year">
                         </div>
-
-                        <!-- 
-                        <h1>Password</h1>
-                        <br>
-                        <label>Password:</label>
-                        <input id="password" placeholder="Password" type="password" name="password">
-
-                        <label>Confirm Password:</label>
-                        <input id="confirmPassword" placeholder="Confirm Password" type="password"
-                            name="confirmPassword"> -->
 
                         <br><br>
 

@@ -1,7 +1,7 @@
 <?php
 session_start();
 include('includes/db_connection.php');
-if(!isset($_SESSION['username']) || $_SESSION['username'] !== "admin"){ // you will also have to check the user type for create shop manager page
+if(!isset($_SESSION['username']) || $_SESSION['username'] != "admin"){ 
   header('Location:login.php');
   exit();
 }
@@ -22,7 +22,7 @@ else{
     <script>
     $(document).ready(function(){
         $('#form').on('submit', function(e){
-            e.preventDefault(); // Prevent default form submission
+            e.preventDefault(); 
             
             // Fetch the form data
             var formData = $(this).serialize();
@@ -53,13 +53,15 @@ else{
             <h1 class="green-text">QUANTUMBYTE SOLUTIONS</h1>
         </header>
     <div class="nav"> <?php include('includes/nav.php'); ?> </div >
+
     <div class="message">
-    <?php
-    if(isset($_SESSION['username'])){
-      echo "Welcome ". $_SESSION['username'];
-    }
-  ?>
-</div>
+        <?php
+            if(isset($_SESSION['username'])){
+            echo "Welcome ". $_SESSION['userrole']." : ". $_SESSION['username'];
+            }
+        ?>
+    </div> 
+
     <div class="main-container createmanager">
             <div class="form-page">
             <form name="form" id="form" method="Post" action="">
@@ -80,8 +82,8 @@ else{
 
                         <input type="submit" value="Create" name="submit">
                         <div class="message">
-    <h3 id="formResult"></h3>
-</div>
+                            <h3 id="formResult"></h3>
+                        </div>
                     </div>
                 </form>
             </div>

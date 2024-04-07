@@ -1,7 +1,7 @@
 <?php
 session_start();
 include('includes/db_connection.php');
-if(!isset($_SESSION['username'])){ // you will also have to check the user type for create shop manager page
+if(!isset($_SESSION['username'])){
   header('Location:login.php');
   exit();
 }
@@ -24,6 +24,7 @@ else{
 <header class="header">
             <h1 class="green-text">QUANTUMBYTE SOLUTIONS</h1>
 </header>
+
 <div class="nav">
 <?php include('includes/nav.php'); ?>
 </div>
@@ -31,10 +32,10 @@ else{
 <div class="welcome">
     <?php
     if(isset($_SESSION['username'])){
-      echo "Welcome ". $_SESSION['username'];
+      echo "Welcome ". $_SESSION['userrole']." : ". $_SESSION['username'];
     }
   ?>
-</div>
+</div> 
 
 <main class="orderContainer">
     <?php
@@ -79,10 +80,8 @@ else{
                 } else {
                     echo "<p>No products found for this order.</p>";
                 }
-
-                
                 ?>
-                <p><strong>Tax : </strong> <?php echo htmlspecialchars($row['tax_amount']); ?></p>
+                <p><strong>Tax : $ </strong> <?php echo htmlspecialchars($row['tax_amount']); ?></p>
                 <p><strong>Total Amount : $ </strong> <?php echo htmlspecialchars($row['total_amount']); ?></p>
             </div>
     <?php
@@ -90,7 +89,6 @@ else{
     }
     ?>
 </main>
-
 
 <footer>
         <p>&copy; 2024 QUANTUMBYTE SOLUTIONS PVT LTD. All rights reserved.</p>

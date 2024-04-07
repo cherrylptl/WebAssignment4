@@ -131,7 +131,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         // Display tax details
-        $responseText .= "<br>Tax: $taxAmount<br>";
+        $responseText .= "<br>Tax: $ $taxAmount<br>";
         $responseText .= "Total Amount: $ $totalAmount<br>";
 
         echo $responseText;

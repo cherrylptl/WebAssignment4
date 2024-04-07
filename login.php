@@ -1,29 +1,29 @@
 <?php
 //start session
-session_start(); // get access to $_SESSION[]
+session_start(); 
 include('includes/db_connection.php');
 
-if(!empty($_POST)){ // check if the form was submitted
+if(!empty($_POST)){ 
+
   $username = $db->real_escape_string($_POST['username']);
   $password = $db->real_escape_string($_POST['password']);
 
   $sqlQuery = "SELECT * FROM `users` WHERE `username` = '$username' AND `password` = '$password'";
 
- /* echo $sqlQuery;
-  exit;*/
+  $sqlResult = $db->query($sqlQuery);
 
-  $sqlResult = $db->query($sqlQuery); // execute the query
-
-  if($sqlResult->num_rows > 0) // if data is returned from DB
+  if($sqlResult->num_rows > 0) 
   {
-    // iterate through the rows
     while($row = $sqlResult->fetch_assoc())
     {
       $_SESSION['username'] = $row['username'];
-      //$_SESSION['type'] = $row['type']; // create a new column for your assignment and use it for the shop logic
+      $_SESSION['userrole'] = $row['role'];
       break;
     }
     header('Location:orders.php');
+  } else {
+    // Username or password is incorrect message
+    $errorMessage = "Invalid username or password.";
   }
 }
 
@@ -43,15 +43,24 @@ if(!empty($_POST)){ // check if the form was submitted
 </head>
  
 <body>
-    <div class="container">
-        <header class="header">
-            <h1 class="green-text">QUANTUMBYTE SOLUTIONS</h1>
-        </header>
-    <div class="nav">
-<?php include('includes/nav.php'); ?>
 
-</div >
-<div class="login">
+      <div class="container">
+          <header class="header">
+              <h1 class="green-text">QUANTUMBYTE SOLUTIONS</h1>
+          </header>
+      <div class="nav">
+        <?php include('includes/nav.php'); ?>
+
+      <div class="message">
+        <?php
+        if(isset($_SESSION['username'])){
+          echo "Welcome ". $_SESSION['userrole']." : ". $_SESSION['username'];
+        }
+        ?>
+      </div> 
+
+      </div >
+      <div class="login">
                 <form name="myform" method="POST" action="">
                     <div class="slider">
 
@@ -66,11 +75,20 @@ if(!empty($_POST)){ // check if the form was submitted
                         <br><br>
 
                         <input type="submit" value="Login">
+                        
+                        <div class="message">
+                        <?php
+                          if(isset($errorMessage)){
+                            echo $errorMessage;
+                          }
+                          ?>
+                        </div>
+
+
                     </div>
                 </form>
-                </div>
     </div>
-
+    <br>
     <footer>
         <p>&copy; 2024 QUANTUMBYTE SOLUTIONS PVT LTD. All rights reserved.</p>
     </footer>
